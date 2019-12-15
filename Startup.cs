@@ -36,13 +36,6 @@ namespace AdvancedDevelopment
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            var connectionString = Configuration["PostgreSql:ConnectionString"];
-            var dbPassword = Configuration["PostgreSql:DbPassword"];
-
-            var builder = new NpgsqlConnectionStringBuilder(connectionString)
-            {
-                Password = dbPassword
-            };
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
