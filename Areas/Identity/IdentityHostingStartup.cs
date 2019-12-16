@@ -35,6 +35,7 @@ namespace AdvancedDevelopment.Areas.Identity
                 services.AddIdentity<User, IdentityRole>(config =>
                     {
                         config.SignIn.RequireConfirmedEmail = true;
+                        config.User.RequireUniqueEmail = true;
                     })
                     .AddEntityFrameworkStores<ApplicationDbContext>()
                     .AddDefaultTokenProviders();
