@@ -28,8 +28,8 @@ namespace AdvancedDevelopment.Areas.Identity
                     IConfiguration googleAuthNSection =
                         context.Configuration.GetSection("Authentication:Google");
 
-                    options.ClientId = "456518461537-tsh2lgoorvkgc6vjuskpvim706118s8e.apps.googleusercontent.com";
-                    options.ClientSecret = "IlP-prlfIlQiQe63YvAn-HiK";
+                    options.ClientId = googleAuthNSection["ClientId"];
+                    options.ClientSecret = googleAuthNSection["ClientSecret"];
                 });
 
                 services.AddIdentity<User, IdentityRole>(config =>
