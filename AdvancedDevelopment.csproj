@@ -1,35 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk.Web">
-
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AspNetCoreHostingModel>inprocess</AspNetCoreHostingModel>
+    <UserSecretsId>1b51f4d8-7cdc-40b5-bdee-241a9d3550a8</UserSecretsId>
   </PropertyGroup>
-
-
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.4" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.2.4" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL.Design" Version="1.1.0" />
+    <PackageReference Include="SendGrid" Version="9.12.0" />
   </ItemGroup>
-
-
   <ItemGroup>
     <Folder Include="Data\" />
   </ItemGroup>
-
-
   <ItemGroup>
     <None Include="Areas\Identity\Pages\Account\AccessDenied.cshtml" />
     <None Include="Areas\Identity\Pages\Account\ConfirmEmail.cshtml" />
     <None Include="Areas\Identity\Pages\Account\ExternalLogin.cshtml" />
     <None Include="Areas\Identity\Pages\Account\ForgotPassword.cshtml" />
     <None Include="Areas\Identity\Pages\Account\ForgotPasswordConfirmation.cshtml" />
-    <None Include="Areas\Identity\Pages\Account\Lockout.cshtml" />
     <None Include="Areas\Identity\Pages\Account\Login.cshtml" />
-    <None Include="Areas\Identity\Pages\Account\LoginWith2fa.cshtml" />
-    <None Include="Areas\Identity\Pages\Account\LoginWithRecoveryCode.cshtml" />
     <None Include="Areas\Identity\Pages\Account\Logout.cshtml" />
     <None Include="Areas\Identity\Pages\Account\Manage\ChangePassword.cshtml" />
     <None Include="Areas\Identity\Pages\Account\Manage\DeletePersonalData.cshtml" />
@@ -51,10 +44,8 @@
     <None Include="Areas\Identity\Pages\Account\ResetPassword.cshtml" />
     <None Include="Areas\Identity\Pages\Account\ResetPasswordConfirmation.cshtml" />
     <None Include="Areas\Identity\Pages\Account\_ViewImports.cshtml" />
-    <None Include="Areas\Identity\Pages\Error.cshtml" />
     <None Include="Areas\Identity\Pages\_ValidationScriptsPartial.cshtml" />
     <None Include="Areas\Identity\Pages\_ViewImports.cshtml" />
     <None Include="Areas\Identity\Pages\_ViewStart.cshtml" />
   </ItemGroup>
-
 </Project>
