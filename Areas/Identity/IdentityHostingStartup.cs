@@ -23,13 +23,6 @@ namespace AdvancedDevelopment.Areas.Identity
                 services.AddDbContext<ApplicationDbContext>(options =>
                     options.UseNpgsql(context.Configuration.GetConnectionString("DefaultConnection")));
 
-                services.AddDefaultIdentity<User>(config =>
-                    {
-                        config.SignIn.RequireConfirmedEmail = true;
-                    })
-                    .AddDefaultUI(UIFramework.Bootstrap4)
-                    .AddEntityFrameworkStores<ApplicationDbContext>();
-
                 services.AddAuthentication().AddGoogle(options =>
                 {
                     IConfiguration googleAuthNSection =
@@ -38,6 +31,12 @@ namespace AdvancedDevelopment.Areas.Identity
                     options.ClientId = "456518461537-tsh2lgoorvkgc6vjuskpvim706118s8e.apps.googleusercontent.com";
                     options.ClientSecret = "IlP-prlfIlQiQe63YvAn-HiK";
                 });
+
+                services.AddDefaultIdentity<User>(config =>
+                    {
+                        config.SignIn.RequireConfirmedEmail = true;
+                    })
+                    .AddEntityFrameworkStores<ApplicationDbContext>();
 
                 services.AddTransient<IEmailSender, EmailSender>();
                 services.Configure<AuthMessageSenderOptions>(context.Configuration);
