@@ -43,8 +43,8 @@ namespace AdvancedDevelopment.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            [EmailAddress]
-            public string Email { get; set; }
+            [Display(Name = "Login Name")]
+            public string UserName { get; set; }
 
             [Required]
             [DataType(DataType.Password)]
@@ -79,7 +79,7 @@ namespace AdvancedDevelopment.Areas.Identity.Pages.Account
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: true);
+                var result = await _signInManager.PasswordSignInAsync(Input.UserName, Input.Password, Input.RememberMe, lockoutOnFailure: true);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
@@ -98,7 +98,7 @@ namespace AdvancedDevelopment.Areas.Identity.Pages.Account
                 {
                     _logger.LogWarning("User email is not confirmed.");
                     ModelState.AddModelError(string.Empty, "Email is not confirmed.");
-                    var user = await _userManager.FindByNameAsync(Input.Email);
+                    var user = await _userManager.FindByNameAsync(Input.UserName);
                     UserId = user.Id;
                     ShowResend = true;
                     return Page();
