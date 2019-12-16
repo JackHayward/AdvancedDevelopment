@@ -32,11 +32,12 @@ namespace AdvancedDevelopment.Areas.Identity
                     options.ClientSecret = "IlP-prlfIlQiQe63YvAn-HiK";
                 });
 
-                services.AddDefaultIdentity<User>(config =>
+                services.AddIdentity<User, IdentityRole>(config =>
                     {
                         config.SignIn.RequireConfirmedEmail = true;
                     })
-                    .AddEntityFrameworkStores<ApplicationDbContext>();
+                    .AddEntityFrameworkStores<ApplicationDbContext>()
+                    .AddDefaultTokenProviders();
 
                 services.AddTransient<IEmailSender, EmailSender>();
                 services.Configure<AuthMessageSenderOptions>(context.Configuration);

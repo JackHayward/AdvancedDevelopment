@@ -22,10 +22,7 @@
     <None Include="Areas\Identity\Pages\Account\ExternalLogin.cshtml" />
     <None Include="Areas\Identity\Pages\Account\ForgotPassword.cshtml" />
     <None Include="Areas\Identity\Pages\Account\ForgotPasswordConfirmation.cshtml" />
-    <None Include="Areas\Identity\Pages\Account\Lockout.cshtml" />
     <None Include="Areas\Identity\Pages\Account\Login.cshtml" />
-    <None Include="Areas\Identity\Pages\Account\LoginWith2fa.cshtml" />
-    <None Include="Areas\Identity\Pages\Account\LoginWithRecoveryCode.cshtml" />
     <None Include="Areas\Identity\Pages\Account\Logout.cshtml" />
     <None Include="Areas\Identity\Pages\Account\Manage\ChangePassword.cshtml" />
     <None Include="Areas\Identity\Pages\Account\Manage\DeletePersonalData.cshtml" />
@@ -47,7 +44,6 @@
     <None Include="Areas\Identity\Pages\Account\ResetPassword.cshtml" />
     <None Include="Areas\Identity\Pages\Account\ResetPasswordConfirmation.cshtml" />
     <None Include="Areas\Identity\Pages\Account\_ViewImports.cshtml" />
-    <None Include="Areas\Identity\Pages\Error.cshtml" />
     <None Include="Areas\Identity\Pages\_ValidationScriptsPartial.cshtml" />
     <None Include="Areas\Identity\Pages\_ViewImports.cshtml" />
     <None Include="Areas\Identity\Pages\_ViewStart.cshtml" />
