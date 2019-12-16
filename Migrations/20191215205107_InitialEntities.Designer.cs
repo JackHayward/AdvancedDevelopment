@@ -9,7 +9,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace AdvancedDevelopment.Migrations
 {
-    [DbContext(typeof(AdvancedDevelopmentContext))]
+    [DbContext(typeof(ApplicationDbContext))]
     [Migration("20191215205107_InitialEntities")]
     partial class InitialEntities
     {

@@ -18,11 +18,20 @@ namespace AdvancedDevelopment.Areas.Identity
         {
             builder.ConfigureServices((context, services) =>
             {
-                services.AddDbContext<AdvancedDevelopmentContext>(options =>
+                services.AddDbContext<ApplicationDbContext>(options =>
                     options.UseNpgsql(context.Configuration.GetConnectionString("DefaultConnection")));
 
                 services.AddDefaultIdentity<User>()
-                    .AddEntityFrameworkStores<AdvancedDevelopmentContext>();
+                    .AddEntityFrameworkStores<ApplicationDbContext>();
+
+                services.AddAuthentication().AddGoogle(options =>
+                {
+                    IConfiguration googleAuthNSection =
+                        context.Configuration.GetSection("Authentication:Google");
+
+                    options.ClientId = "456518461537-tsh2lgoorvkgc6vjuskpvim706118s8e.apps.googleusercontent.com";
+                    options.ClientSecret = "IlP-prlfIlQiQe63YvAn-HiK";
+                });
             });
         }
     }

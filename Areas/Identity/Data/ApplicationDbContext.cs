@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AdvancedDevelopment.Areas.Identity.Data
 {
-    public class AdvancedDevelopmentContext : IdentityDbContext<User>
+    public class ApplicationDbContext : IdentityDbContext<User>
     {
-        public AdvancedDevelopmentContext(DbContextOptions<AdvancedDevelopmentContext> options)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
