@@ -16,11 +16,16 @@ namespace AdvancedDevelopment.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class LoginModel : PageModel
     {
+        private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly ILogger<LoginModel> _logger;
 
-        public LoginModel(SignInManager<User> signInManager, ILogger<LoginModel> logger)
+        public bool ShowResend { get; set; }
+        public string UserId { get; set; }
+
+        public LoginModel(UserManager<User> userManager, SignInManager<User> signInManager, ILogger<LoginModel> logger)
         {
+            _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
         }
@@ -88,6 +93,15 @@ namespace AdvancedDevelopment.Areas.Identity.Pages.Account
                 {
                     _logger.LogWarning("User account locked out.");
                     return RedirectToPage("./Lockout");
+                }
+                if (result.IsNotAllowed)
+                {
+                    _logger.LogWarning("User email is not confirmed.");
+                    ModelState.AddModelError(string.Empty, "Email is not confirmed.");
+                    var user = await _userManager.FindByNameAsync(Input.Email);
+                    UserId = user.Id;
+                    ShowResend = true;
+                    return Page();
                 }
                 else
                 {

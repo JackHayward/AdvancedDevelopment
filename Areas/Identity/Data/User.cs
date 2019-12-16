@@ -9,5 +9,7 @@ namespace AdvancedDevelopment.Areas.Identity.Data
     // Add profile data for application users by adding properties to the User class
     public class User : IdentityUser
     {
+        [PersonalData] 
+        public string UnconfirmedEmail { get; set; }
     }
 }

@@ -38,6 +38,7 @@ namespace AdvancedDevelopment.Areas.Identity
                         config.User.RequireUniqueEmail = true;
                     })
                     .AddEntityFrameworkStores<ApplicationDbContext>()
+                    .AddUserManager<ApplicationUserManager>()
                     .AddDefaultTokenProviders();
 
                 services.AddTransient<IEmailSender, EmailSender>();

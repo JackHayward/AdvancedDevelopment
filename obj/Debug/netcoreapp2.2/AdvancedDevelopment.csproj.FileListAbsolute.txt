@@ -60,3 +60,6 @@ D:\dev\University\AdvancedDevelopment\AdvancedDevelopment\obj\Debug\netcoreapp2.
 D:\dev\University\AdvancedDevelopment\AdvancedDevelopment\obj\Debug\netcoreapp2.2\Razor\Areas\Identity\Pages\_ViewImports.cshtml.g.cs
 D:\dev\University\AdvancedDevelopment\AdvancedDevelopment\obj\Debug\netcoreapp2.2\Razor\Areas\Identity\Pages\_ViewStart.cshtml.g.cs
 D:\dev\University\AdvancedDevelopment\AdvancedDevelopment\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_LoginPartial.cshtml.g.cs
+D:\dev\University\AdvancedDevelopment\AdvancedDevelopment\obj\Debug\netcoreapp2.2\Razor\Areas\Identity\Pages\Account\CheckEmail.cshtml.g.cs
+D:\dev\University\AdvancedDevelopment\AdvancedDevelopment\obj\Debug\netcoreapp2.2\Razor\Areas\Identity\Pages\Account\UnconfirmedEmail.cshtml.g.cs
+D:\dev\University\AdvancedDevelopment\AdvancedDevelopment\obj\Debug\netcoreapp2.2\Razor\Areas\Identity\Pages\Account\Manage\ChangeEmail.cshtml.g.cs

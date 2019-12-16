@@ -14,6 +14,7 @@ namespace AdvancedDevelopment.Areas.Identity.Pages.Account
     public class ConfirmEmailModel : PageModel
     {
         private readonly UserManager<User> _userManager;
+        public bool ShowInvalid { get; set; }
 
         public ConfirmEmailModel(UserManager<User> userManager)
         {
@@ -36,7 +37,12 @@ namespace AdvancedDevelopment.Areas.Identity.Pages.Account
             var result = await _userManager.ConfirmEmailAsync(user, code);
             if (!result.Succeeded)
             {
-                throw new InvalidOperationException($"Error confirming email for user with ID '{userId}':");
+                //throw new InvalidOperationException($"Error confirming email for user with ID '{userId}':");
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+                ShowInvalid = true;
             }
 
             return Page();
