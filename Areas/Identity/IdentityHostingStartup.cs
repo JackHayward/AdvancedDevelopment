@@ -2,7 +2,9 @@
 using AdvancedDevelopment.Areas.Identity.Data;
 using AdvancedDevelopment.Models;
 using AdvancedDevelopment.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Identity.UI.Services;

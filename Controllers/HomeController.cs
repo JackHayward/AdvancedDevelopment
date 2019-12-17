@@ -4,12 +4,15 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using AdvancedDevelopment.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AdvancedDevelopment.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
+
         public IActionResult Index()
         {
             return View();
