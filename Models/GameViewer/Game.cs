@@ -15,6 +15,7 @@ namespace AdvancedDevelopment.Models.GameViewer
         public string Name { get; set; }
 
         [Required]
+        [Display(Name = "Type of Game")]
         public GameType GameType { get; set; }
 
         [Required]
@@ -24,7 +25,7 @@ namespace AdvancedDevelopment.Models.GameViewer
 
         [Required]
         [DataType(DataType.ImageUrl)]
-        [Display(Name = "Poster")]
+        [Display(Name = "Logo")]
         public string ImageUrl { get; set; }
     }
 }
