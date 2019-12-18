@@ -2,7 +2,10 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+        <p>Click any of the links below to go to the corresponding page showing cloud development functionality.</p>
+
+        <input type="button" value="Google Maps Integration" onclick="location.href='@Url.Action("Index", "Maps")'" />
+
 </div>
