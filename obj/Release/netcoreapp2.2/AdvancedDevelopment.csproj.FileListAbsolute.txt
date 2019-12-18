@@ -65,3 +65,8 @@ D:\dev\University\AdvancedDevelopment\AdvancedDevelopment\obj\Release\netcoreapp
 D:\dev\University\AdvancedDevelopment\AdvancedDevelopment\obj\Release\netcoreapp2.2\Razor\Areas\Identity\Pages\Account\UnconfirmedEmail.cshtml.g.cs
 D:\dev\University\AdvancedDevelopment\AdvancedDevelopment\obj\Release\netcoreapp2.2\Razor\Views\Home\Maps\Map.cshtml.g.cs
 D:\dev\University\AdvancedDevelopment\AdvancedDevelopment\obj\Release\netcoreapp2.2\Razor\Views\Shared\Partials\_Header.cshtml.g.cs
+D:\dev\University\AdvancedDevelopment\AdvancedDevelopment\obj\Release\netcoreapp2.2\Razor\Views\Home\GameViewer\Create.cshtml.g.cs
+D:\dev\University\AdvancedDevelopment\AdvancedDevelopment\obj\Release\netcoreapp2.2\Razor\Views\Home\GameViewer\Delete.cshtml.g.cs
+D:\dev\University\AdvancedDevelopment\AdvancedDevelopment\obj\Release\netcoreapp2.2\Razor\Views\Home\GameViewer\Details.cshtml.g.cs
+D:\dev\University\AdvancedDevelopment\AdvancedDevelopment\obj\Release\netcoreapp2.2\Razor\Views\Home\GameViewer\Edit.cshtml.g.cs
+D:\dev\University\AdvancedDevelopment\AdvancedDevelopment\obj\Release\netcoreapp2.2\Razor\Views\Home\GameViewer\Index.cshtml.g.cs
