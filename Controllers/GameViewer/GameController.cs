@@ -4,11 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using AdvancedDevelopment.Areas.Identity.Data;
 using AdvancedDevelopment.Models.GameViewer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace AdvancedDevelopment.Controllers.GameViewer
 {
+    [Authorize]
     public class GameController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -21,7 +23,7 @@ namespace AdvancedDevelopment.Controllers.GameViewer
         // GET: Games
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Game.ToListAsync());
+            return View("~/Views/Home/GameViewer/Index.cshtml", await _context.Game.ToListAsync());
         }
 
         // GET: Games/Details/5
@@ -39,13 +41,13 @@ namespace AdvancedDevelopment.Controllers.GameViewer
                 return NotFound();
             }
 
-            return View(game);
+            return View("~/Views/Home/GameViewer/Details.cshtml", game);
         }
 
         // GET: Games/Create
         public IActionResult Create()
         {
-            return View();
+            return View("~/Views/Home/GameViewer/Create.cshtml");
         }
 
         // POST: Games/Create
@@ -61,7 +63,7 @@ namespace AdvancedDevelopment.Controllers.GameViewer
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(game);
+            return View("~/Views/Home/GameViewer/Create.cshtml", game);
         }
 
         // GET: Games/Edit/5
@@ -77,7 +79,7 @@ namespace AdvancedDevelopment.Controllers.GameViewer
             {
                 return NotFound();
             }
-            return View(game);
+            return View("~/Views/Home/GameViewer/Edit.cshtml", game);
         }
 
         // POST: Games/Edit/5
@@ -85,7 +87,7 @@ namespace AdvancedDevelopment.Controllers.GameViewer
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Genre,Rating,ImdbUrl,ImageUrl")] Game game)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,GameType,GameUrl,ImageUrl")] Game game)
         {
             if (id != game.Id)
             {
@@ -112,7 +114,7 @@ namespace AdvancedDevelopment.Controllers.GameViewer
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(game);
+            return View("~/Views/Home/GameViewer/Edit.cshtml", game);
         }
 
         // GET: Games/Delete/5
@@ -130,7 +132,7 @@ namespace AdvancedDevelopment.Controllers.GameViewer
                 return NotFound();
             }
 
-            return View(game);
+            return View("~/Views/Home/GameViewer/Delete.cshtml", game);
         }
 
         // POST: Games/Delete/5
