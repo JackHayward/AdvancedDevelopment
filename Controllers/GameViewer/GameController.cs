@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AdvancedDevelopment.Data;
+using AdvancedDevelopment.Areas.Identity.Data;
 using AdvancedDevelopment.Models.GameViewer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,9 +11,9 @@ namespace AdvancedDevelopment.Controllers.GameViewer
 {
     public class GameController : Controller
     {
-        private readonly GameContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public GameController(GameContext context)
+        public GameController(ApplicationDbContext context)
         {
             _context = context;
         }

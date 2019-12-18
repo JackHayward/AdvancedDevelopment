@@ -3,15 +3,17 @@ using System;
 using AdvancedDevelopment.Areas.Identity.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace AdvancedDevelopment.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class AdvancedDevelopmentContextModelSnapshot : ModelSnapshot
+    [Migration("20191218201253_videogames")]
+    partial class videogames
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

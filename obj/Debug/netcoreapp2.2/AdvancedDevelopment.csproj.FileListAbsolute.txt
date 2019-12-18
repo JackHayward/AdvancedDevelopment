@@ -69,3 +69,4 @@ D:\dev\University\AdvancedDevelopment\AdvancedDevelopment\obj\Debug\netcoreapp2.
 D:\dev\University\AdvancedDevelopment\AdvancedDevelopment\obj\Debug\netcoreapp2.2\Razor\Views\Home\GameViewer\Create.cshtml.g.cs
 D:\dev\University\AdvancedDevelopment\AdvancedDevelopment\obj\Debug\netcoreapp2.2\Razor\Views\Home\GameViewer\Details.cshtml.g.cs
 D:\dev\University\AdvancedDevelopment\AdvancedDevelopment\obj\Debug\netcoreapp2.2\Razor\Views\Home\GameViewer\Edit.cshtml.g.cs
+D:\dev\University\AdvancedDevelopment\AdvancedDevelopment\obj\Debug\netcoreapp2.2\Razor\Views\Home\GameViewer\Index.cshtml.g.cs
