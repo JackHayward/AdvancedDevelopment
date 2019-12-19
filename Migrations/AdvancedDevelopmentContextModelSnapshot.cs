@@ -71,6 +71,28 @@ namespace AdvancedDevelopment.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("AdvancedDevelopment.Models.GameViewer.Game", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("GameType");
+
+                    b.Property<string>("GameUrl")
+                        .IsRequired();
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired();
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(60);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Game");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
