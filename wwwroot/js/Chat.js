@@ -10,7 +10,6 @@ connection.on("ReceiveMessage", function (user, message) {
     var icon = document.createElement("i");
     //icon.class.add("fa-li fa fa-check-square");
 
-
     li1.classList.add("list-group-item");
     li1.style.fontWeight = "bold";
     li1.textContent = user;
