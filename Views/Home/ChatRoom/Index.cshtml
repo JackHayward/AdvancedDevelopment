@@ -1,0 +1,25 @@
+﻿@using AdvancedDevelopment.Areas.Identity.Data
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+<div class="container">
+    <div class="row"></div>
+    <div class="row">
+        <div class="col-md-12"></div>
+        <div class="col-md-12">
+            <div class="jumbotron">
+                <h1 class="display-4">How to use the Chatroom</h1>
+                <p class="lead">Load up two instances of the website, log into two different accounts and navigate both accounts to this page, messages will be exchanged between the accounts in real time.</p>
+            </div>
+            <input type="hidden" value="@UserManager.GetUserName(User)" id="userName" />
+            <input placeholder="Enter your message" class="form-control" style="margin-bottom: 10px; margin-top: 5px" type="text" id="userMessage" />
+            <input type="button" class="btn btn-primary" id="sendBtn" value="Send Message" />
+            <hr />
+            <ul class="list-group" style="max-width: 100%" id="messagesList"></ul>
+        </div>
+    </div>
+</div>
+
+<script src="~/lib/aspnet/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/Chat.js"></script>
