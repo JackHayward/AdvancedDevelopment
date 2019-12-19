@@ -70,3 +70,5 @@ D:\dev\University\AdvancedDevelopment\AdvancedDevelopment\obj\Debug\netcoreapp2.
 D:\dev\University\AdvancedDevelopment\AdvancedDevelopment\obj\Debug\netcoreapp2.2\Razor\Views\Home\GameViewer\Details.cshtml.g.cs
 D:\dev\University\AdvancedDevelopment\AdvancedDevelopment\obj\Debug\netcoreapp2.2\Razor\Views\Home\GameViewer\Edit.cshtml.g.cs
 D:\dev\University\AdvancedDevelopment\AdvancedDevelopment\obj\Debug\netcoreapp2.2\Razor\Views\Home\GameViewer\Index.cshtml.g.cs
+D:\dev\University\AdvancedDevelopment\AdvancedDevelopment\bin\Debug\netcoreapp2.2\libman.json
+D:\dev\University\AdvancedDevelopment\AdvancedDevelopment\obj\Debug\netcoreapp2.2\Razor\Views\Home\ChatRoom\Index.cshtml.g.cs
