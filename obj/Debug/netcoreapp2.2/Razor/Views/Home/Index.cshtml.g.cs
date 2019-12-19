@@ -31,7 +31,7 @@ using AdvancedDevelopment.Models;
         public async override global::System.Threading.Tasks.Task ExecuteAsync()
         {
 #line 1 "D:\dev\University\AdvancedDevelopment\AdvancedDevelopment\Views\Home\Index.cshtml"
-
+  
     ViewData["Title"] = "Home Page";
 
 #line default

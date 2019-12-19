@@ -7,13 +7,9 @@ connection.on("ReceiveMessage", function (user, message) {
     var msg = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
     var encodedMsg = user + ": " + msg;
     var li1 = document.createElement("li");
-    var icon = document.createElement("i");
-    //icon.class.add("fa-li fa fa-check-square");
-
     li1.classList.add("list-group-item");
     li1.style.fontWeight = "bold";
     li1.textContent = user;
-    li1.appendChild(icon);
 
     var li2 = document.createElement("li");
     li2.classList.add("list-group-item");
