@@ -10,11 +10,13 @@
                 <p class="lead">A selection of different Trello management options.</p>
             </div>
             <div>
-                <p class="lead">View the cards in the Advanced Development Trello board.</p>
-                @foreach (var x in Model.CardCollection)
-                {
-                    <p>@x.Name</p>
-                }
+                <p class="lead">View a list of the cards in the Advanced Development Trello board.</p>
+                <ul class="list-group">
+                    @foreach (var x in Model.CardCollection)
+                    {
+                        <li class="list-group-item"><a href="@x.Url" target="_blank">@x.Name</a></li>
+                    }
+                </ul>
             </div>
         </div>
     </div>
