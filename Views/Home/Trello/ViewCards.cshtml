@@ -1,5 +1,11 @@
 ﻿@model AdvancedDevelopment.Models.Trello.TrelloCard
 
+<style>
+    .alternate {
+        background-color: #FBFBFB
+    }
+</style>
+
 <div class="container">
     <div class="row"></div>
     <div class="row">
@@ -9,7 +15,7 @@
                 <h1 class="display-4">Trello API Integration</h1>
                 <p class="lead">A selection of different Trello management options.</p>
             </div>
-            <div>
+            <div id="cardList">
                 <p class="lead">View a list of the cards in the Advanced Development Trello board.</p>
                 <ul class="list-group">
                     @foreach (var x in Model.CardCollection)
@@ -24,4 +30,10 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        $(document).ready(function(){
+            $('#cardList ul li:nth-child(odd)').addClass('alternate');
+        });
+    </script>
 }

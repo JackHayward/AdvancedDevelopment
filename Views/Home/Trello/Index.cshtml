@@ -12,7 +12,6 @@
             <div>
                 <p class="lead">Add a new card to the Advanced Development Trello board.</p>
                 <form asp-controller="Trello" asp-action="PostCard">
-                    <label asp-for="CardName" class="form-control"></label>
                     <input asp-for="CardName" placeholder="Enter desired card name" class="form-control" style="margin-bottom: 10px; margin-top: 5px" />
                     <input class="btn btn-primary" type="submit" role="button" value="Add card">
                     <span asp-validation-for="CardName" class="text-danger"></span>
@@ -29,4 +28,5 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+
 }
