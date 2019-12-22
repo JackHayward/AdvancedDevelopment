@@ -1,0 +1,25 @@
+﻿@model AdvancedDevelopment.Models.Trello.TrelloCard
+
+<div class="container">
+    <div class="row"></div>
+    <div class="row">
+        <div class="col-md-12"></div>
+        <div class="col-md-12">
+            <div class="jumbotron">
+                <h1 class="display-4">Trello API Integration</h1>
+                <p class="lead">A selection of different Trello management options.</p>
+            </div>
+            <div>
+                <p class="lead">View the cards in the Advanced Development Trello board.</p>
+                @foreach (var x in Model.CardCollection)
+                {
+                    <p>@x.Name</p>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,4 +1,4 @@
-﻿@model AdvancedDevelopment.Models.Trello.Trello
+﻿@model AdvancedDevelopment.Models.Trello.TrelloCard
 
 <div class="container">
     <div class="row"></div>
@@ -18,6 +18,10 @@
                     <span asp-validation-for="CardName" class="text-danger"></span>
                 </form>
                 <hr />
+            </div>
+            <div>
+                <p class="lead">View the cards in the Advanced Development Trello board.</p>
+                <p><a class="btn btn-primary" href="@Url.Action("ShowCards", "Trello")" role="button">View details &raquo;</a></p>
             </div>
         </div>
     </div>

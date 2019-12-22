@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AdvancedDevelopment.Models.Trello;
 using AdvancedDevelopment.Services;
+using Manatee.Trello;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AdvancedDevelopment.Controllers
@@ -22,7 +23,7 @@ namespace AdvancedDevelopment.Controllers
         [HttpGet]
         public IActionResult AddCard()
         {
-            var model = new Trello();
+            var model = new TrelloCard();
 
             return View("~/Views/Home/Trello/Index.cshtml", model);
         }
@@ -35,6 +36,19 @@ namespace AdvancedDevelopment.Controllers
             await trelloManager.AddCard(cardName);
 
             return View("~/Views/Home/Trello/Index.cshtml");
+        }
+
+        public async Task<IActionResult> ShowCards()
+        {
+            var trelloManager = new TrelloManager();
+            var cardList = await trelloManager.GetCards();
+            
+            var trelloCard = new TrelloCard
+            {
+                CardCollection = cardList
+            };
+
+            return View("~/Views/Home/Trello/ViewCards.cshtml", trelloCard);
         }
     }
 }
