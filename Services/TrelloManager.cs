@@ -46,6 +46,16 @@ namespace AdvancedDevelopment.Services
             }
         }
 
+        public async Task DeleteCard(string id)
+        {
+            var factory = _trelloFactory;
+
+            if (id != null)
+            {
+                await factory.Card(id).Delete();
+            }
+        }
+
         public async Task<ICardCollection> GetCards()
         {
             var board = _trelloFactory.Board(BoardId);

@@ -1,4 +1,5 @@
 ﻿@model AdvancedDevelopment.Models.Trello.TrelloCard
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 <style>
     .alternate {
@@ -18,9 +19,17 @@
             <div id="cardList">
                 <p class="lead">View a list of the cards in the Advanced Development Trello board.</p>
                 <ul class="list-group">
-                    @foreach (var x in Model.CardCollection)
+                    @if (Model.CardCollection.Count().Equals(0))
                     {
-                        <li class="list-group-item"><a href="@x.Url" target="_blank">@x.Name</a></li>
+                        <p>No cards to display, you should create one.</p>
+                        <a class="btn btn-primary" style="max-width: 150px" asp-action="Index">Add a new card</a>
+                    }
+                    else
+                    {
+                        @foreach (var x in Model.CardCollection)
+                        {
+                            <li class="list-group-item"><a href="@x.Url" target="_blank">@x.Name </a><a class="btn btn-danger" asp-action="Delete" asp-route-id="@x.Id">Delete</a></li>
+                        }
                     }
                 </ul>
             </div>
@@ -32,7 +41,7 @@
     <partial name="_ValidationScriptsPartial" />
 
     <script>
-        $(document).ready(function(){
+        $(document).ready(function () {
             $('#cardList ul li:nth-child(odd)').addClass('alternate');
         });
     </script>

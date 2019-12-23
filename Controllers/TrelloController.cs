@@ -35,7 +35,14 @@ namespace AdvancedDevelopment.Controllers
 
             await trelloManager.AddCard(cardName);
 
-            return View("~/Views/Home/Trello/Index.cshtml");
+            var cardList = await trelloManager.GetCards();
+
+            var trelloCard = new TrelloCard
+            {
+                CardCollection = cardList
+            };
+
+            return View("~/Views/Home/Trello/ViewCards.cshtml", trelloCard);
         }
 
         public async Task<IActionResult> ShowCards()
@@ -43,6 +50,21 @@ namespace AdvancedDevelopment.Controllers
             var trelloManager = new TrelloManager();
             var cardList = await trelloManager.GetCards();
             
+            var trelloCard = new TrelloCard
+            {
+                CardCollection = cardList
+            };
+
+            return View("~/Views/Home/Trello/ViewCards.cshtml", trelloCard);
+        }
+
+        public async Task<IActionResult> Delete(string id)
+        {
+            var trelloManager = new TrelloManager();
+            await trelloManager.DeleteCard(id);
+
+            var cardList = await trelloManager.GetCards();
+
             var trelloCard = new TrelloCard
             {
                 CardCollection = cardList
