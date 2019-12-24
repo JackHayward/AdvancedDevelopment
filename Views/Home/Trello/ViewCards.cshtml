@@ -28,7 +28,11 @@
                     {
                         @foreach (var x in Model.CardCollection)
                         {
-                            <li class="list-group-item"><a href="@x.Url" target="_blank">@x.Name </a><a class="btn btn-danger" asp-action="Delete" asp-route-id="@x.Id">Delete</a></li>
+                            <li class="list-group-item">
+                                <a href="@x.Url" target="_blank">@x.Name </a>
+                                <p>@x.Description</p>
+                                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@x.Id">Delete</a>
+                            </li>
                         }
                     }
                 </ul>

@@ -29,11 +29,11 @@ namespace AdvancedDevelopment.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostCard(string cardName)
+        public async Task<IActionResult> PostCard(string cardName, string cardDescription)
         {
             var trelloManager = new TrelloManager();
 
-            await trelloManager.AddCard(cardName);
+            await trelloManager.AddCard(cardName, cardDescription);
 
             var cardList = await trelloManager.GetCards();
 

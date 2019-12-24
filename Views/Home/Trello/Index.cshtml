@@ -9,10 +9,14 @@
                 <h1 class="display-4">Trello API Integration</h1>
                 <p class="lead">A selection of different Trello management options.</p>
             </div>
-            <div>
+            <div class="form-group">
                 <p class="lead">Add a new card to the Advanced Development Trello board.</p>
                 <form asp-controller="Trello" asp-action="PostCard">
-                    <input asp-for="CardName" placeholder="Enter desired card name" class="form-control" style="margin-bottom: 10px; margin-top: 5px" />
+                    <label asp-for="CardName">Card name</label>
+                    <input asp-for="CardName" placeholder="Enter card name" class="form-control" style="margin-top: 5px" />
+                    <hr class="invisible"/>
+                    <label asp-for="CardDescription">Card description</label>
+                    <input asp-for="CardDescription" placeholder="Enter a description" class="form-control" style="margin-bottom: 10px" />
                     <input class="btn btn-primary" type="submit" role="button" value="Add card">
                     <span asp-validation-for="CardName" class="text-danger"></span>
                 </form>

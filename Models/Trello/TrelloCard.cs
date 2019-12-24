@@ -13,10 +13,9 @@ namespace AdvancedDevelopment.Models.Trello
         [StringLength(20, ErrorMessage = "Card name length must be between {2} and {1}.", MinimumLength = 5)]
         public string CardName { get; set; }
 
+        [Required(ErrorMessage = "Please make sure the card description is not empty")]
+        public string CardDescription { get; set; }
+
         public ICardCollection CardCollection { get; set; }
-
-        public IReadOnlyCardCollection CardSet { get; set; }
-
-        public IEnumerable<ICard> Cards { get; set; }
     }
 }

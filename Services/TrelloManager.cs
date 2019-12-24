@@ -35,14 +35,14 @@ namespace AdvancedDevelopment.Services
             return board;
         }
 
-        public async Task AddCard(string cardName)
+        public async Task AddCard(string cardName, string cardDescription)
         {
             var board = GetBoard();
             var list = board.Result.Lists.FirstOrDefault(l => l.Name == "Main List");
 
             if (list != null)
             {
-                await list.Cards.Add(cardName);
+                await list.Cards.Add(cardName, cardDescription, null);
             }
         }
 
