@@ -58,42 +58,44 @@ namespace AdvancedDevelopment.Controllers.GameViewer
         }
 
         //GET
-        public IActionResult Details(Key key)
+        public IActionResult Details(string key)
         {
+            var dsKey = JsonConvert.DeserializeObject<Key>(key);
             List<Entity> gameEntities = new List<Entity>();
             GameViewModel viewModel = new GameViewModel();
-            
-            if (key == null)
+
+            if (dsKey == null)
             {
                 return NotFound();
             }
 
-            Query query = new Query(_kind)
-            {
-                Filter = Filter.And(Filter.Equal("key", key))
-            };
+            //Query query = new Query(_kind)
+            //{
+            //    Filter = Filter.And(Filter.Equal("key", key))
+            //};
 
-            if (query.Equals(null))
+            //if (query.Equals(null))
+            //{
+            //    return NotFound();
+            //}
+
+            Entity gameEntity = _db.Lookup(dsKey);
+
+            if (gameEntity.Equals(null))
             {
                 return NotFound();
             }
 
-            var game = _db.RunQueryLazily(query).FirstOrDefault();
+            //var game = _db.RunQueryLazily(query).FirstOrDefault();
 
-            if (game != null)
-            {
-                Enum.TryParse($"{game["gameType"].StringValue}", out GameType gameType);
+            Enum.TryParse($"{gameEntity["gameType"].StringValue}", out GameType gameType);
 
-                viewModel.Key = game.Key;
-                viewModel.Name = $"{game["name"].StringValue}";
-                viewModel.GameType = gameType;
-                viewModel.GameUrl = $"{game["gameUrl"].StringValue}";
-                viewModel.ImageUrl = $"{game["imageUrl"].StringValue}";
-            }
+            viewModel.Key = gameEntity.Key;
+            viewModel.Name = $"{gameEntity["name"].StringValue}";
+            viewModel.GameType = gameType;
+            viewModel.GameUrl = $"{gameEntity["gameUrl"].StringValue}";
+            viewModel.ImageUrl = $"{gameEntity["imageUrl"].StringValue}";
 
-            //var game = await _context.Game
-            //    .FirstOrDefaultAsync(m => m.Id == key);
-            
             return View("~/Views/Home/GameViewer/Details.cshtml", viewModel);
         }
 
@@ -145,24 +147,12 @@ namespace AdvancedDevelopment.Controllers.GameViewer
 
             GameViewModel viewModel = new GameViewModel();
 
-            //Query query = new Query(_kind)
-            //{
-            //    Filter = Filter.And(Filter.Equal("key", dsKey))
-            //};
-
             Entity gameEntity = _db.Lookup(dsKey);
 
             if (gameEntity.Equals(null))
             {
                 return NotFound();
             }
-
-            //var game = _db.RunQueryLazily(query).FirstOrDefault();
-
-            //if (game == null)
-            //{
-            //    return NotFound();
-            //}
 
             Enum.TryParse($"{gameEntity["gameType"].StringValue}", out GameType gameType);
 
@@ -193,9 +183,6 @@ namespace AdvancedDevelopment.Controllers.GameViewer
             {
                 try
                 {
-                    //_context.Update(game);
-                    //await _context.SaveChangesAsync();
-
                     Entity gameEntity = new Entity
                     {
                         Key = dsKey,
@@ -213,7 +200,7 @@ namespace AdvancedDevelopment.Controllers.GameViewer
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!GameExists(game.Key))
+                    if (!GameExists(game.Key.ToString()))
                     {
                         return NotFound();
                     }
@@ -263,13 +250,19 @@ namespace AdvancedDevelopment.Controllers.GameViewer
             return RedirectToAction(nameof(Index));
         }
 
-        private bool GameExists(Key id)
+        private bool GameExists(string key)
         {
+            var dsKey = JsonConvert.DeserializeObject<Key>(key);
             Query query = new Query(_kind);
 
-            return _db.RunQueryLazily(query).Any(e => e.Key.Equals(id));
-
-            //return _context.Game.Any(e => e.Id == id);
+            if (_db.Lookup(dsKey) == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 }

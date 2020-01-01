@@ -13,16 +13,21 @@ namespace AdvancedDevelopment.Models.ViewModels
         public Key Key { get; set; }
         public int Id { get; set; }
 
-        [Display(Name = "Name of Game")]
+        [Display(Name = "Name")]
+        [Required]
+        [StringLength(60, MinimumLength = 3)]
         public string Name { get; set; }
 
-        [Display(Name = "Type of Game")]
+        [Required]
+        [Display(Name = "Genre")]
         public GameType GameType { get; set; }
 
+        [Required]
         [Display(Name = "Website")]
         public string GameUrl { get; set; }
 
-        [Display(Name = "Game Logo")]
+        [Required]
+        [Display(Name = "Logo")]
         public string ImageUrl { get; set; }
     }
 }

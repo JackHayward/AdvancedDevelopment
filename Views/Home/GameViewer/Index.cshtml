@@ -7,9 +7,8 @@
     <div class="col-md-12">
         <div class="jumbotron">
             <h1 class="display-4">Video Game List</h1>
-            <p class="lead">Created to demonstrate CRUD functionality with a cloud hosted database. It requires you to be logged in to use it, either via the regular login system or the google login system.</p>
+            <p class="lead">Created to demonstrate CRUD functionality with a NoSQL database (Google Datastore)</p>
             <hr class="my-4">
-            <p>Why not have a go?</p>
             <p class="lead">
                 <a type="submit" class="btn btn-primary btn-lg" href="@Url.Action("Create", "Game")" role="button">Add a game to the list</a>
             </p>
@@ -54,7 +53,7 @@
                     </td>
                     <td>
                         <a asp-action="Edit" asp-route-key="@item.Key.ToString()">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Details" asp-route-key="@item.Key.ToString()">Details</a> |
                         <a asp-action="Delete" asp-route-key="@item.Key.ToString()">Delete</a>
                     </td>
                 </tr>
