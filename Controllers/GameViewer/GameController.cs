@@ -61,7 +61,6 @@ namespace AdvancedDevelopment.Controllers.GameViewer
         public IActionResult Details(string key)
         {
             var dsKey = JsonConvert.DeserializeObject<Key>(key);
-            //List<Entity> gameEntities = new List<Entity>();
             GameViewModel viewModel = new GameViewModel();
 
             if (dsKey == null)
@@ -69,24 +68,12 @@ namespace AdvancedDevelopment.Controllers.GameViewer
                 return NotFound();
             }
 
-            //Query query = new Query(_kind)
-            //{
-            //    Filter = Filter.And(Filter.Equal("key", key))
-            //};
-
-            //if (query.Equals(null))
-            //{
-            //    return NotFound();
-            //}
-
             Entity gameEntity = _db.Lookup(dsKey);
 
             if (gameEntity.Equals(null))
             {
                 return NotFound();
             }
-
-            //var game = _db.RunQueryLazily(query).FirstOrDefault();
 
             Enum.TryParse($"{gameEntity["gameType"].StringValue}", out GameType gameType);
 
@@ -127,8 +114,6 @@ namespace AdvancedDevelopment.Controllers.GameViewer
 
             if (ModelState.IsValid)
             {
-                //_context.Add(game);
-                //await _context.SaveChangesAsync();
                 using (var transaction = _db.BeginTransaction())
                 {
                     transaction.Upsert(gameEntities);
