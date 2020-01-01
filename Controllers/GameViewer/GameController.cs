@@ -61,7 +61,7 @@ namespace AdvancedDevelopment.Controllers.GameViewer
         public IActionResult Details(string key)
         {
             var dsKey = JsonConvert.DeserializeObject<Key>(key);
-            List<Entity> gameEntities = new List<Entity>();
+            //List<Entity> gameEntities = new List<Entity>();
             GameViewModel viewModel = new GameViewModel();
 
             if (dsKey == null)
