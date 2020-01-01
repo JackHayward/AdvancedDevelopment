@@ -227,34 +227,41 @@ namespace AdvancedDevelopment.Controllers.GameViewer
             return View("~/Views/Home/GameViewer/Edit.cshtml", game);
         }
 
-        // GET
-        //public async Task<IActionResult> Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
+        //GET
+        public IActionResult Delete(string key)
+        {
+            var dsKey = JsonConvert.DeserializeObject<Key>(key);
+            GameViewModel viewModel = new GameViewModel();
 
-        //    var game = await _context.Game
-        //        .FirstOrDefaultAsync(m => m.Id == id);
-        //    if (game == null)
-        //    {
-        //        return NotFound();
-        //    }
+            Entity gameEntity = _db.Lookup(dsKey);
 
-        //    return View("~/Views/Home/GameViewer/Delete.cshtml", game);
-        //}
+            if (gameEntity.Equals(null))
+            {
+                return NotFound();
+            }
 
-        // POST
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> DeleteConfirmed(int id)
-        //{
-        //    var game = await _context.Game.FindAsync(id);
-        //    _context.Game.Remove(game);
-        //    await _context.SaveChangesAsync();
-        //    return RedirectToAction(nameof(Index));
-        //}
+            Enum.TryParse($"{gameEntity["gameType"].StringValue}", out GameType gameType);
+
+            viewModel.Key = dsKey;
+            viewModel.Name = $"{gameEntity["name"].StringValue}";
+            viewModel.GameType = gameType;
+            viewModel.GameUrl = $"{gameEntity["gameUrl"].StringValue}";
+            viewModel.ImageUrl = $"{gameEntity["imageUrl"].StringValue}";
+
+            return View("~/Views/Home/GameViewer/Delete.cshtml", viewModel);
+        }
+
+        //POST
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirmed(string key)
+        {
+            var dsKey = JsonConvert.DeserializeObject<Key>(key);
+
+            _db.Delete(dsKey);
+
+            return RedirectToAction(nameof(Index));
+        }
 
         private bool GameExists(Key id)
         {

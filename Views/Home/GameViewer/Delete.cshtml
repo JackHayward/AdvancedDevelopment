@@ -1,4 +1,4 @@
-﻿@model AdvancedDevelopment.Models.GameViewer.Game
+﻿@model AdvancedDevelopment.Models.ViewModels.GameViewModel
 
 @{
     ViewData["Title"] = "Delete";
@@ -39,6 +39,10 @@
 
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
+        @{
+            var key = Model.Key.ToString();
+        }
+        <input type="hidden" asp-for="@key" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
     </form>
