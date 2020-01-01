@@ -95,7 +95,7 @@ namespace AdvancedDevelopment.Controllers.GameViewer
         // POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("Id,Name,GameType,GameUrl,ImageUrl")] Game game)
+        public IActionResult Create([Bind("Id,Name,GameType,GameUrl,ImageUrl")] GameViewModel game)
         {
             List<Entity> gameEntities = new List<Entity>();
             Key incompleteKey = _db.CreateKeyFactory(_kind).CreateIncompleteKey();
