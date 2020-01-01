@@ -6,6 +6,7 @@
     <UserSecretsId>1b51f4d8-7cdc-40b5-bdee-241a9d3550a8</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Google.Cloud.Datastore.V1" Version="2.2.0" />
     <PackageReference Include="Manatee.Trello" Version="4.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />

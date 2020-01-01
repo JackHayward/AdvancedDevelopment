@@ -4,9 +4,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using AdvancedDevelopment.Areas.Identity.Data;
 using AdvancedDevelopment.Models.GameViewer;
+using AdvancedDevelopment.Models.ViewModels;
+using Google.Cloud.Datastore.V1;
+using Google.Protobuf.WellKnownTypes;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
+using SendGrid.Helpers.Mail;
+using Enum = System.Enum;
+
 
 namespace AdvancedDevelopment.Controllers.GameViewer
 {
@@ -15,33 +22,79 @@ namespace AdvancedDevelopment.Controllers.GameViewer
     {
         private readonly ApplicationDbContext _context;
 
+        private readonly DatastoreDb _db;
+        private string _kind;
+
         public GameController(ApplicationDbContext context)
         {
             _context = context;
+
+            var projectId = "advanceddevelopment-262000";
+            _db = DatastoreDb.Create(projectId);
+            _kind = "game";
         }
 
-        // GET: Games
-        public async Task<IActionResult> Index()
+        //GET
+        public IActionResult Index()
         {
-            return View("~/Views/Home/GameViewer/Index.cshtml", await _context.Game.ToListAsync());
+            List<GameViewModel> gameList = new List<GameViewModel>();
+            Query query = new Query(_kind);
+
+            foreach (var game in _db.RunQueryLazily(query))
+            {
+                GameViewModel gameViewModel = new GameViewModel();
+                Enum.TryParse($"{game["gameType"].StringValue}", out GameType gameType);
+
+                gameViewModel.Key = game.Key;
+                gameViewModel.Name = $"{game["name"].StringValue}";
+                gameViewModel.GameType = gameType;
+                gameViewModel.GameUrl = $"{game["gameUrl"].StringValue}";
+                gameViewModel.ImageUrl = $"{game["imageUrl"].StringValue}";
+
+                gameList.Add(gameViewModel);
+            }
+
+            return View("~/Views/Home/GameViewer/Index.cshtml", gameList);
         }
 
-        // GET: Games/Details/5
-        public async Task<IActionResult> Details(int? id)
+        //GET
+        public IActionResult Details(Key key)
         {
-            if (id == null)
+            List<Entity> gameEntities = new List<Entity>();
+            GameViewModel viewModel = new GameViewModel();
+            
+            if (key == null)
             {
                 return NotFound();
             }
 
-            var game = await _context.Game
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (game == null)
+            Query query = new Query(_kind)
+            {
+                Filter = Filter.And(Filter.Equal("key", key))
+            };
+
+            if (query.Equals(null))
             {
                 return NotFound();
             }
 
-            return View("~/Views/Home/GameViewer/Details.cshtml", game);
+            var game = _db.RunQueryLazily(query).FirstOrDefault();
+
+            if (game != null)
+            {
+                Enum.TryParse($"{game["gameType"].StringValue}", out GameType gameType);
+
+                viewModel.Key = game.Key;
+                viewModel.Name = $"{game["name"].StringValue}";
+                viewModel.GameType = gameType;
+                viewModel.GameUrl = $"{game["gameUrl"].StringValue}";
+                viewModel.ImageUrl = $"{game["imageUrl"].StringValue}";
+            }
+
+            //var game = await _context.Game
+            //    .FirstOrDefaultAsync(m => m.Id == key);
+            
+            return View("~/Views/Home/GameViewer/Details.cshtml", viewModel);
         }
 
         // GET: Games/Create
@@ -50,46 +103,88 @@ namespace AdvancedDevelopment.Controllers.GameViewer
             return View("~/Views/Home/GameViewer/Create.cshtml");
         }
 
-        // POST: Games/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,GameType,GameUrl,ImageUrl")] Game game)
+        public IActionResult Create([Bind("Id,Name,GameType,GameUrl,ImageUrl")] Game game)
         {
+            List<Entity> gameEntities = new List<Entity>();
+            Key incompleteKey = _db.CreateKeyFactory(_kind).CreateIncompleteKey();
+            Key key = _db.AllocateId(incompleteKey);
+
+            gameEntities.Add(
+                new Entity
+                {
+                    Key = key,
+                    ["name"] = game.Name,
+                    ["gameType"] = game.GameType.ToString(),
+                    ["gameUrl"] = game.GameUrl,
+                    ["imageUrl"] = game.ImageUrl
+                }
+            );
+
             if (ModelState.IsValid)
             {
-                _context.Add(game);
-                await _context.SaveChangesAsync();
+                //_context.Add(game);
+                //await _context.SaveChangesAsync();
+                using (var transaction = _db.BeginTransaction())
+                {
+                    transaction.Upsert(gameEntities);
+                    transaction.Commit();
+                }
+
                 return RedirectToAction(nameof(Index));
             }
             return View("~/Views/Home/GameViewer/Create.cshtml", game);
         }
 
-        // GET: Games/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        // GET
+        public IActionResult Edit(string key)
         {
-            if (id == null)
+            var dsKey = JsonConvert.DeserializeObject<Key>(key);
+
+            GameViewModel viewModel = new GameViewModel();
+
+            //Query query = new Query(_kind)
+            //{
+            //    Filter = Filter.And(Filter.Equal("key", dsKey))
+            //};
+
+            Entity gameEntity = _db.Lookup(dsKey);
+
+            if (gameEntity.Equals(null))
             {
                 return NotFound();
             }
 
-            var game = await _context.Game.FindAsync(id);
-            if (game == null)
-            {
-                return NotFound();
-            }
-            return View("~/Views/Home/GameViewer/Edit.cshtml", game);
+            //var game = _db.RunQueryLazily(query).FirstOrDefault();
+
+            //if (game == null)
+            //{
+            //    return NotFound();
+            //}
+
+            Enum.TryParse($"{gameEntity["gameType"].StringValue}", out GameType gameType);
+
+            viewModel.Key = dsKey;
+            viewModel.Name = $"{gameEntity["name"].StringValue}";
+            viewModel.GameType = gameType;
+            viewModel.GameUrl = $"{gameEntity["gameUrl"].StringValue}";
+            viewModel.ImageUrl = $"{gameEntity["imageUrl"].StringValue}";
+
+            return View("~/Views/Home/GameViewer/Edit.cshtml", viewModel);
         }
 
-        // POST: Games/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,GameType,GameUrl,ImageUrl")] Game game)
+        public IActionResult Edit(string key, [Bind("Key,Id,Name,GameType,GameUrl,ImageUrl")] GameViewModel game)
         {
-            if (id != game.Id)
+            var dsKey = JsonConvert.DeserializeObject<Key>(key);
+
+            Entity entity = _db.Lookup(dsKey);
+
+            if (entity.Equals(null))
             {
                 return NotFound();
             }
@@ -98,12 +193,27 @@ namespace AdvancedDevelopment.Controllers.GameViewer
             {
                 try
                 {
-                    _context.Update(game);
-                    await _context.SaveChangesAsync();
+                    //_context.Update(game);
+                    //await _context.SaveChangesAsync();
+
+                    Entity gameEntity = new Entity
+                    {
+                        Key = dsKey,
+                        ["name"] = game.Name,
+                        ["gameType"] = game.GameType.ToString(),
+                        ["gameUrl"] = game.GameUrl,
+                        ["imageUrl"] = game.ImageUrl
+                    };
+
+                    using (var transaction = _db.BeginTransaction())
+                    {
+                        transaction.Update(gameEntity);
+                        transaction.Commit();
+                    }
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!GameExists(game.Id))
+                    if (!GameExists(game.Key))
                     {
                         return NotFound();
                     }
@@ -117,38 +227,42 @@ namespace AdvancedDevelopment.Controllers.GameViewer
             return View("~/Views/Home/GameViewer/Edit.cshtml", game);
         }
 
-        // GET: Games/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        // GET
+        //public async Task<IActionResult> Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    var game = await _context.Game
+        //        .FirstOrDefaultAsync(m => m.Id == id);
+        //    if (game == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return View("~/Views/Home/GameViewer/Delete.cshtml", game);
+        //}
+
+        // POST
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> DeleteConfirmed(int id)
+        //{
+        //    var game = await _context.Game.FindAsync(id);
+        //    _context.Game.Remove(game);
+        //    await _context.SaveChangesAsync();
+        //    return RedirectToAction(nameof(Index));
+        //}
+
+        private bool GameExists(Key id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            Query query = new Query(_kind);
 
-            var game = await _context.Game
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (game == null)
-            {
-                return NotFound();
-            }
+            return _db.RunQueryLazily(query).Any(e => e.Key.Equals(id));
 
-            return View("~/Views/Home/GameViewer/Delete.cshtml", game);
-        }
-
-        // POST: Games/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var game = await _context.Game.FindAsync(id);
-            _context.Game.Remove(game);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool GameExists(int id)
-        {
-            return _context.Game.Any(e => e.Id == id);
+            //return _context.Game.Any(e => e.Id == id);
         }
     }
 }

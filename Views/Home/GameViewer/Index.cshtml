@@ -1,4 +1,4 @@
-﻿@model IEnumerable<AdvancedDevelopment.Models.GameViewer.Game>
+﻿@model IEnumerable<AdvancedDevelopment.Models.ViewModels.GameViewModel>
 
 @{
     ViewData["Title"] = "Video Game List";
@@ -53,7 +53,8 @@
                         <a href=@item.GameUrl target="_blank">@item.Name</a>
                     </td>
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        @*<a asp-action="Edit" asp-route-id="@item.Key">Edit</a> |*@
+                        <a asp-action="Edit" asp-route-key="@item.Key.ToString()">Edit</a> |
                         <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                         <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                     </td>

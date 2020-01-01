@@ -17,7 +17,7 @@ namespace AdvancedDevelopment.Services
         public TrelloAuthorization Auth = new TrelloAuthorization
         {
             AppKey = "61c67c975cfe95d8089408d20290922c",
-            UserToken = "44d910131f7a31dec6ad79491b342a586ed1978344d3e0f64ee8fa81bd2f4bb9",
+            UserToken = "44d910131f7a31dec6ad79491b342a586ed1978344d3e0f64ee8fa81bd2f4bb9"
         };
 
         public TrelloManager()

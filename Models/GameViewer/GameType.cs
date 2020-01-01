@@ -9,13 +9,13 @@ namespace AdvancedDevelopment.Models.GameViewer
     public enum GameType
     {
         [Display(Name = "First Person Shooter")]
-        FPS,
+        Fps,
         [Display(Name = "Massively Multiplayer Role Playing Game")]
-        MMORPG,
+        Mmorpg,
         [Display(Name = "Role Playing Game")]
-        RPG,
+        Rpg,
         [Display(Name = "Multiplayer Online Battle Arena")]
-        MOBA,
+        Moba,
         Strategy
     }
 }

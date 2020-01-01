@@ -41,6 +41,10 @@
       "frameworks": {
         "netcoreapp2.2": {
           "dependencies": {
+            "Google.Cloud.Datastore.V1": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
             "Manatee.Trello": {
               "target": "Package",
               "version": "[4.1.1, )"

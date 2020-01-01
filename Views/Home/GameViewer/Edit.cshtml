@@ -1,5 +1,5 @@
 ﻿@using AdvancedDevelopment.Models.GameViewer
-@model AdvancedDevelopment.Models.GameViewer.Game
+@model AdvancedDevelopment.Models.ViewModels.GameViewModel
 
 @{
     ViewData["Title"] = "Edit";
@@ -14,6 +14,10 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
+            @{
+               var key = Model.Key.ToString();
+            }
+            <input type="hidden" asp-for="@key" />
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />

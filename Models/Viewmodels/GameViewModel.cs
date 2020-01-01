@@ -3,30 +3,26 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using AdvancedDevelopment.Models.GameViewer;
 using Google.Cloud.Datastore.V1;
 
-namespace AdvancedDevelopment.Models.GameViewer
+namespace AdvancedDevelopment.Models.ViewModels
 {
-    public class Game
+    public class GameViewModel
     {
-        public int Id { get; set; }
         public Key Key { get; set; }
+        public int Id { get; set; }
 
-        [Required]
-        [StringLength(60, MinimumLength = 3)]
+        [Display(Name = "Name of Game")]
         public string Name { get; set; }
 
-        [Required]
+        [Display(Name = "Type of Game")]
         public GameType GameType { get; set; }
 
-        [Required]
-        [DataType(DataType.Url)]
         [Display(Name = "Website")]
         public string GameUrl { get; set; }
 
-        [Required]
-        [DataType(DataType.ImageUrl)]
-        [Display(Name = "Logo")]
+        [Display(Name = "Game Logo")]
         public string ImageUrl { get; set; }
     }
 }
