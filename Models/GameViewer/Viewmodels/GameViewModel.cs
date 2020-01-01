@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using AdvancedDevelopment.Models.GameViewer;
+﻿using System.ComponentModel.DataAnnotations;
 using Google.Cloud.Datastore.V1;
 
-namespace AdvancedDevelopment.Models.ViewModels
+namespace AdvancedDevelopment.Models.GameViewer.Viewmodels
 {
     public class GameViewModel
     {

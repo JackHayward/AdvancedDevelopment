@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AdvancedDevelopment.Areas.Identity.Data;
 using AdvancedDevelopment.Models.GameViewer;
-using AdvancedDevelopment.Models.ViewModels;
+using AdvancedDevelopment.Models.GameViewer.Viewmodels;
 using Google.Cloud.Datastore.V1;
 using Google.Protobuf.WellKnownTypes;
 using Microsoft.AspNetCore.Authorization;

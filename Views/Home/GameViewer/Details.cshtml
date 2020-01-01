@@ -1,4 +1,4 @@
-﻿@model AdvancedDevelopment.Models.ViewModels.GameViewModel
+﻿@model AdvancedDevelopment.Models.GameViewer.Viewmodels.GameViewModel
 
 @{
     ViewData["Title"] = "Details";
@@ -32,7 +32,7 @@
             @Html.DisplayNameFor(model => model.ImageUrl)
         </dt>
         <dd class="col-sm-10">
-            <img src="@Url.Content(Model.ImageUrl)" alt="Image" />
+            <img src="@Url.Content(Model.ImageUrl)" style="max-width: 300px" alt="Image" />
         </dd>
     </dl>
 </div>
