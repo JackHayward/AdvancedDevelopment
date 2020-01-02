@@ -74,3 +74,4 @@ D:\dev\University\AdvancedDevelopment\AdvancedDevelopment\bin\Debug\netcoreapp2.
 D:\dev\University\AdvancedDevelopment\AdvancedDevelopment\obj\Debug\netcoreapp2.2\Razor\Views\Home\ChatRoom\Index.cshtml.g.cs
 D:\dev\University\AdvancedDevelopment\AdvancedDevelopment\obj\Debug\netcoreapp2.2\Razor\Views\Home\Trello\Index.cshtml.g.cs
 D:\dev\University\AdvancedDevelopment\AdvancedDevelopment\obj\Debug\netcoreapp2.2\Razor\Views\Home\Trello\ViewCards.cshtml.g.cs
+D:\dev\University\AdvancedDevelopment\AdvancedDevelopment\obj\Debug\netcoreapp2.2\Razor\Views\Home\Trello\Edit.cshtml.g.cs

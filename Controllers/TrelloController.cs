@@ -35,7 +35,40 @@ namespace AdvancedDevelopment.Controllers
 
             await trelloManager.AddCard(cardName, cardDescription);
 
-            var cardList = await trelloManager.GetCards();
+            var cardList = await trelloManager.GetAllCards();
+
+            var trelloCard = new TrelloCard
+            {
+                CardCollection = cardList
+            };
+
+            return View("~/Views/Home/Trello/ViewCards.cshtml", trelloCard);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(string id)
+        {
+            var trelloManager = new TrelloManager();
+            var card = await trelloManager.GetSingleCard(id);
+
+            var model = new TrelloCard
+            {
+                CardName = card.Name,
+                CardDescription = card.Description,
+                Id = id
+            };
+
+            return View("~/Views/Home/Trello/Edit.cshtml", model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateCard(string cardName, string cardDescription, string id)
+        {
+            var trelloManager = new TrelloManager();
+
+            trelloManager.EditCard(id,cardName, cardDescription);
+
+            var cardList = await trelloManager.GetAllCards();
 
             var trelloCard = new TrelloCard
             {
@@ -48,7 +81,7 @@ namespace AdvancedDevelopment.Controllers
         public async Task<IActionResult> ShowCards()
         {
             var trelloManager = new TrelloManager();
-            var cardList = await trelloManager.GetCards();
+            var cardList = await trelloManager.GetAllCards();
             
             var trelloCard = new TrelloCard
             {
@@ -63,7 +96,7 @@ namespace AdvancedDevelopment.Controllers
             var trelloManager = new TrelloManager();
             await trelloManager.DeleteCard(id);
 
-            var cardList = await trelloManager.GetCards();
+            var cardList = await trelloManager.GetAllCards();
 
             var trelloCard = new TrelloCard
             {

@@ -46,17 +46,43 @@ namespace AdvancedDevelopment.Services
             }
         }
 
-        public async Task DeleteCard(string id)
+        public void EditCard(string id, string cardName, string cardDescription)
         {
-            var factory = _trelloFactory;
-
             if (id != null)
             {
-                await factory.Card(id).Delete();
+                //await _trelloFactory.Card(id).Delete();
+                var card = _trelloFactory.Card(id);
+
+                card.Name = cardName;
+                card.Description = cardDescription;
             }
         }
 
-        public async Task<ICardCollection> GetCards()
+        public async Task DeleteCard(string id)
+        {
+            if (id != null)
+            {
+                await _trelloFactory.Card(id).Delete();
+            }
+        }
+
+        public async Task<ICard> GetSingleCard(string id)
+        {
+            //var board = _trelloFactory.Board(BoardId);
+            //await board.Lists[0].Cards.Refresh();
+
+            //var cardList = board.Lists[0].Cards;
+
+
+            //var card = cardList.FirstOrDefault(x => x.ShortId.ToString() == id);
+
+            var card = _trelloFactory.Card(id);
+            await card.Refresh();
+
+            return card;
+        }
+
+        public async Task<ICardCollection> GetAllCards()
         {
             var board = _trelloFactory.Board(BoardId);
             await board.Lists[0].Cards.Refresh();

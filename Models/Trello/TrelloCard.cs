@@ -17,5 +17,7 @@ namespace AdvancedDevelopment.Models.Trello
         public string CardDescription { get; set; }
 
         public ICardCollection CardCollection { get; set; }
+
+        public string Id { get; set; }
     }
 }
