@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Manatee.Trello;
+using Microsoft.Extensions.Configuration;
 using IQueryable = Manatee.Trello.IQueryable;
 
 namespace AdvancedDevelopment.Services
@@ -14,15 +15,16 @@ namespace AdvancedDevelopment.Services
         private const string BoardId = "xAkpefvd";
         private readonly TrelloFactory _trelloFactory;
 
-        public TrelloAuthorization Auth = new TrelloAuthorization
-        {
-            AppKey = "61c67c975cfe95d8089408d20290922c",
-            UserToken = "44d910131f7a31dec6ad79491b342a586ed1978344d3e0f64ee8fa81bd2f4bb9"
-        };
+        public TrelloAuthorization Auth { get; }
 
-        public TrelloManager()
+        public TrelloManager(IConfiguration configuration)
         {
             _trelloFactory = new TrelloFactory();
+            Auth = new TrelloAuthorization
+            {
+                AppKey = configuration.GetValue<string>("TrelloAppKey"),
+                UserToken = configuration.GetValue<string>("TrelloUserToken")
+            };
         }
 
         public async Task<IBoard> GetBoard()
@@ -50,7 +52,6 @@ namespace AdvancedDevelopment.Services
         {
             if (id != null)
             {
-                //await _trelloFactory.Card(id).Delete();
                 var card = _trelloFactory.Card(id);
 
                 card.Name = cardName;
@@ -68,14 +69,6 @@ namespace AdvancedDevelopment.Services
 
         public async Task<ICard> GetSingleCard(string id)
         {
-            //var board = _trelloFactory.Board(BoardId);
-            //await board.Lists[0].Cards.Refresh();
-
-            //var cardList = board.Lists[0].Cards;
-
-
-            //var card = cardList.FirstOrDefault(x => x.ShortId.ToString() == id);
-
             var card = _trelloFactory.Card(id);
             await card.Refresh();
 

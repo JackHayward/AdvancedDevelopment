@@ -6,16 +6,20 @@ using AdvancedDevelopment.Models.Trello;
 using AdvancedDevelopment.Services;
 using Manatee.Trello;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
 namespace AdvancedDevelopment.Controllers
 {
     public class TrelloController : Controller
     {
+        private readonly TrelloManager _trelloManager;
+
+        public TrelloController(TrelloManager trelloManager) =>
+            _trelloManager = trelloManager;
+
         public async Task <IActionResult> Index()
         {
-            var trelloManager = new TrelloManager();
-
-            await trelloManager.GetBoard();
+            await _trelloManager.GetBoard();
 
             return View("~/Views/Home/Trello/Index.cshtml");
         }
@@ -31,11 +35,9 @@ namespace AdvancedDevelopment.Controllers
         [HttpPost]
         public async Task<IActionResult> PostCard(string cardName, string cardDescription)
         {
-            var trelloManager = new TrelloManager();
+            await _trelloManager.AddCard(cardName, cardDescription);
 
-            await trelloManager.AddCard(cardName, cardDescription);
-
-            var cardList = await trelloManager.GetAllCards();
+            var cardList = await _trelloManager.GetAllCards();
 
             var trelloCard = new TrelloCard
             {
@@ -48,8 +50,7 @@ namespace AdvancedDevelopment.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(string id)
         {
-            var trelloManager = new TrelloManager();
-            var card = await trelloManager.GetSingleCard(id);
+            var card = await _trelloManager.GetSingleCard(id);
 
             var model = new TrelloCard
             {
@@ -64,11 +65,9 @@ namespace AdvancedDevelopment.Controllers
         [HttpPost]
         public async Task<IActionResult> UpdateCard(string cardName, string cardDescription, string id)
         {
-            var trelloManager = new TrelloManager();
+            _trelloManager.EditCard(id,cardName, cardDescription);
 
-            trelloManager.EditCard(id,cardName, cardDescription);
-
-            var cardList = await trelloManager.GetAllCards();
+            var cardList = await _trelloManager.GetAllCards();
 
             var trelloCard = new TrelloCard
             {
@@ -80,8 +79,7 @@ namespace AdvancedDevelopment.Controllers
 
         public async Task<IActionResult> ShowCards()
         {
-            var trelloManager = new TrelloManager();
-            var cardList = await trelloManager.GetAllCards();
+            var cardList = await _trelloManager.GetAllCards();
             
             var trelloCard = new TrelloCard
             {
@@ -93,10 +91,9 @@ namespace AdvancedDevelopment.Controllers
 
         public async Task<IActionResult> Delete(string id)
         {
-            var trelloManager = new TrelloManager();
-            await trelloManager.DeleteCard(id);
+            await _trelloManager.DeleteCard(id);
 
-            var cardList = await trelloManager.GetAllCards();
+            var cardList = await _trelloManager.GetAllCards();
 
             var trelloCard = new TrelloCard
             {

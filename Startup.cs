@@ -36,6 +36,8 @@ namespace AdvancedDevelopment
                     options.LoginPath = new PathString("/login");
                 });
 
+            services.AddSingleton<TrelloManager>();
+
 
             services.ConfigureApplicationCookie(options =>
             {
