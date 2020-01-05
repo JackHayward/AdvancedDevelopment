@@ -5,11 +5,13 @@ using System.Threading.Tasks;
 using AdvancedDevelopment.Models.Trello;
 using AdvancedDevelopment.Services;
 using Manatee.Trello;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 
 namespace AdvancedDevelopment.Controllers
 {
+    [Authorize]
     public class TrelloController : Controller
     {
         private readonly TrelloManager _trelloManager;
