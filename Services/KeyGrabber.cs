@@ -10,7 +10,6 @@ namespace AdvancedDevelopment.Services
     {
         private readonly IConfiguration _configuration;
 
-
         public KeyGrabber(IConfiguration configuration)
         {
             _configuration = configuration;

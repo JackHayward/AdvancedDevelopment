@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using SendGrid;
 using SendGrid.Helpers.Mail;
@@ -11,16 +12,28 @@ namespace AdvancedDevelopment.Services
 {
     public class EmailSender : IEmailSender
     {
-        public EmailSender(IOptions<AuthMessageSenderOptions> optionsAccessor)
+        private readonly IConfiguration _configuration;
+        private readonly String SendGridUser;
+        private readonly String SendGridKey;
+
+        public EmailSender(IConfiguration configuration)
         {
-            Options = optionsAccessor.Value;
+            _configuration = configuration;
+
+            KeyGrabber keyGrabber = new KeyGrabber(_configuration);
+
+            SendGridKey = keyGrabber.GetKey("SendGridKey");
+            SendGridUser = keyGrabber.GetKey("SendGridUser");
         }
 
-        public AuthMessageSenderOptions Options { get; }
+        //public EmailSender(IOptions<AuthMessageSenderOptions> optionsAccessor)
+        //{
+        //    Options = optionsAccessor.Value;
+        //}
 
         public Task SendEmailAsync(string email, string subject, string message)
         {
-            return Execute(Options.SendGridKey, subject, message, email);
+            return Execute(SendGridKey, subject, message, email);
         }
 
         public Task Execute(string apiKey, string subject, string message, string email)
@@ -28,7 +41,7 @@ namespace AdvancedDevelopment.Services
             var client = new SendGridClient(apiKey);
             var msg = new SendGridMessage()
             {
-                From = new EmailAddress("Joe@contoso.com", "Joe Smith"),
+                From = new EmailAddress("jack@contoso.com", "Wessex Applications"),
                 Subject = subject,
                 PlainTextContent = message,
                 HtmlContent = message
