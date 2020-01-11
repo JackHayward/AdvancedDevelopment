@@ -40,7 +40,7 @@ namespace AdvancedDevelopment
                 });
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseNpgsql(keyGrabber.GetKey("DefaultConnection")));
 
             services.AddAuthentication().AddGoogle(options =>
             {
