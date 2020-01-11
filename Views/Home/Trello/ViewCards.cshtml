@@ -29,21 +29,20 @@
                         @foreach (var x in Model.CardCollection)
                         {
                             <li class="list-group-item">
-                                <a href="@x.Url" target="_blank">@x.Name </a>
-                                <p>@x.Description</p>
+                                <a class="h4" href="@x.Url" target="_blank">@x.Name </a>
+                                <p class="lead">@x.Description</p>
                                 <a class="btn btn-danger" asp-action="Delete" asp-route-id="@x.Id">Delete</a>
-                                <a class="btn btn-secondary" asp-action="Edit" asp-route-id="@x.Id">Edit</a>
+                                <a class="btn btn-primary" asp-action="Edit" asp-route-id="@x.Id">Edit</a>
                             </li>
                         }
                     }
                 </ul>
             </div>
+            <div style="margin-top: 10px">
+                <a asp-action="Index">Back to Trello management</a>
+            </div>
         </div>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

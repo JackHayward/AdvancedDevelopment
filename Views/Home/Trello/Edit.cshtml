@@ -14,12 +14,12 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
-                <label asp-for="CardName" class="control-label"></label>
+                <label asp-for="CardName" class="control-label">Card name</label>
                 <input asp-for="CardName" class="form-control" />
                 <span asp-validation-for="CardName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CardDescription" class="control-label"></label>
+                <label asp-for="CardDescription" class="control-label">Card description</label>
                 <input asp-for="CardDescription" class="form-control" />
                 <span asp-validation-for="CardDescription" class="text-danger"></span>
             </div>
@@ -31,7 +31,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Back to Trello management</a>
 </div>
 
 @section Scripts {

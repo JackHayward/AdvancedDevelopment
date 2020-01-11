@@ -10,13 +10,16 @@
                 <p class="lead">A selection of different Trello management options.</p>
             </div>
             <div class="form-group">
-                <p class="lead">Add a new card to the Advanced Development Trello board.</p>
+                <h4 style="margin-bottom: 20px">Add a new card to the Advanced Development Trello board.</h4>
                 <form asp-controller="Trello" asp-action="PostCard">
-                    <label asp-for="CardName">Card name</label>
-                    <input asp-for="CardName" placeholder="Enter card name" class="form-control" style="margin-top: 5px" />
-                    <hr class="invisible"/>
-                    <label asp-for="CardDescription">Card description</label>
-                    <input asp-for="CardDescription" placeholder="Enter a description" class="form-control" style="margin-bottom: 10px" />
+                    <div class="form-group">
+                        <label asp-for="CardName">Card name</label>
+                        <input asp-for="CardName" placeholder="Enter card name" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CardDescription">Card description</label>
+                        <input asp-for="CardDescription" placeholder="Enter a description" class="form-control" />
+                    </div>
                     <input class="btn btn-primary" type="submit" role="button" value="Add card">
                     <span asp-validation-for="CardName" class="text-danger"></span>
                     <span asp-validation-for="CardDescription" class="text-danger"></span>
@@ -24,8 +27,7 @@
                 <hr />
             </div>
             <div>
-                <p class="lead">View the cards in the Advanced Development Trello board.</p>
-                <p><a class="btn btn-primary" href="@Url.Action("ShowCards", "Trello")" role="button">View details &raquo;</a></p>
+                <p><a class="btn btn-primary" href="@Url.Action("ShowCards", "Trello")" role="button">View all existing trello cards &raquo;</a></p>
             </div>
         </div>
     </div>
