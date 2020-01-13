@@ -24,14 +24,14 @@ Final year University project in which we were tasked with creating an applicati
 <img src="https://i.imgur.com/JPzA9sa.png">
 
 ## Google Maps
-<img src="https://i.imgur.com/QKhqHPF.jpg">
+<img src="https://i.imgur.com/O0pfgt8.jpg">
 
 ## Chatroom
-<img src="https://i.imgur.com/RlX58U5.png">
+<img src="https://i.imgur.com/pOnYdIH.png">
 
 ## Trello manager
-<img src="https://i.imgur.com/RlX58U5.png">
-<img src="https://i.imgur.com/qejdaSh.png">
+<img src="https://i.imgur.com/laSOnvi.png">
+<img src="https://i.imgur.com/VUyooLf.png">
 
 ___
 ## Video Demonstration
