@@ -18,10 +18,10 @@ Final year University project in which we were tasked with creating an applicati
 <img src="https://i.imgur.com/5fceyQ0.png">
 
 ## Manage Account
-<img src="https://i.imgur.com/eSaqZD5.png">
+<img src="https://i.imgur.com/5A5MOGU.png">
 
 ## Game Viewer (NoSQL)
-<img src="https://i.imgur.com/JPzA9sa.png">
+<img src="https://i.imgur.com/0hPnYc9.png">
 
 ## Google Maps
 <img src="https://i.imgur.com/O0pfgt8.jpg">
